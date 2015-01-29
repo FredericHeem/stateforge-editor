@@ -1,0 +1,720 @@
+html
+{
+    height: 100%;
+    width: 100%;
+}
+
+body
+{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-repeat: repeat;
+    font-size:75%;
+    border:0 !important;
+}
+
+
+#StateMachineDiagram
+{
+    display: inline-block;
+    position: relative;
+    top: 0px;
+    vertical-align: top;
+    
+    margin-bottom:0.2em;
+    margin-top:0em;
+    padding-top:0em;
+    padding-bottom:2em;
+    padding-left:0.3em;
+    padding-right:0.3em;
+    width:auto;
+}
+
+#StateMachineDiagram table, #TableEventContainer table
+{
+    border-collapse: collapse;
+    position:relative;
+}
+
+#StateMachineDiagram tbody, #TableEventContainer tbody
+{
+    width:100%;    
+    margin:auto;
+}
+
+#StateMachineDiagram table th,  #TableEventContainer table th
+{
+    padding: 0.2em;
+    text-align: left;
+}
+
+#StateMachineDiagram table td, #TableEventContainer table td
+{
+    width:auto;
+    text-align:left;   
+    padding: 0.2em;
+    vertical-align: top;
+    border-width:0px 0px 0px 0px !important;
+}
+
+#StateMachineDiagram table tr, #TableEventContainer table tr
+{
+    display:table-row;
+    width:100%;    
+    padding: 0em;
+    border-width:1px 0px 0px 0px !important;
+    border-top-style:solid;
+}
+
+#StateMachineDiagram table td.shrink {
+    white-space:nowrap;
+    width:1px;
+}
+
+#StateMachineDiagram table td.expand 
+{
+    width: auto;
+    white-space:nowrap;
+}
+
+
+
+#Header
+{
+    width: auto;
+    height: 100px;
+    margin-top: 10px;
+}
+
+#TopMenu
+{
+    position: relative;
+    z-index: 2000;
+    float: right;
+    padding-top: 7px;
+    padding-right: 10px;
+    border:0px !important;
+    background:transparent;
+}
+
+#TopMenu ul li
+{
+    display: inline;
+    list-style: none;
+    float: left;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 4px;
+    margin-top: 6px; 
+}
+
+#TopMenu ul
+{
+    display: inline;
+    padding: 0 0 0 0;
+    margin: 0;
+    text-align: right;
+    float: right;
+    bottom: 0;
+}
+
+#Logo
+{
+    width: auto;
+    height: auto;
+    float: left;
+}
+
+#HeaderContent
+{
+    float: left;
+    width: auto;
+    height: auto;
+}
+
+#WelcomeInfo
+{
+    clear: both;
+    margin: 10px;
+}
+
+#TabView
+{
+    padding: 0px;
+    margin:0px;
+    border-width:0px;
+}
+
+#StateMachineEditor
+{
+    width: auto;
+    height: auto;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    
+}
+
+#tabXmlModel
+{
+    padding: 0px;
+    margin: 0px;
+}
+
+#tabDiagram
+{
+    text-align: center;
+    padding:0px;
+    height:auto;
+    width:auto;
+}
+
+#tabEvents
+{
+    text-align: center;
+    padding:0px;
+}
+
+#TableEventContainer
+{
+}
+
+
+#TableEvent
+{
+    margin:auto;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+#TableEvent td
+{
+    vertical-align: middle;
+}
+
+#examples
+{
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.examplesLanguage
+{
+    vertical-align: top;
+    width: auto;
+    height: auto;
+    display: inline;
+    margin: 0px;
+    padding: 10px;
+}
+
+#editor
+{
+    width: auto;
+    height: auto; /*min-width: 640px;     min-height: 800px;*/
+    margin: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+ul#EditorMenu
+{
+    padding: 0 0 0 0;
+    margin: 0;
+    bottom: 0;
+}
+
+ul#EditorMenu li
+{
+    display: inline;
+}
+
+#StateEditorDesktopAlert
+{
+    text-align: left;
+    display: table;
+    width:auto;
+    margin: 0 auto;
+}
+
+
+
+#StateMachineTitle
+{
+    text-align: center;
+    width: auto; /*margin:auto; padding:auto !important;    */
+    padding: 0;
+}
+
+#Root
+{
+    margin: 0 !important;
+}
+#BrowserCheck
+{
+    background: red;
+}
+
+.event
+{
+    cursor: pointer;
+}
+
+.eventSource
+{
+    cursor: pointer;
+}
+
+.StateRoot
+{
+    padding:0px;
+
+    margin:0em;
+}
+
+.State
+{
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.4em;
+    padding: 0em !important;
+    width: auto;
+    height: auto;
+    text-align: left;
+    
+}
+
+.StateChildren
+{
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0em !important;
+    padding: 0em !important;
+    width: auto;
+    height: auto;
+    text-align: left;
+    
+}
+
+ .StateOrthogonal
+{
+    border-style: dashed !important;
+    border-width:1px;
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.4em;
+    width: auto;
+    height: auto;
+    text-align: left;
+}
+
+ .StateFinal
+{
+ 
+}
+
+ .StateHistory
+{
+    border-style: dotted !important;
+    border-width: 2px  !important;
+    padding:2px;
+}
+
+.StateParallel
+{
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0.5em;
+    padding: 0em !important;
+    width: auto;
+    height: auto;
+    text-align: left;
+}
+
+.parallelTable
+{
+width:100%;    
+}
+
+.parallelNextState
+{
+    cursor: pointer;
+}
+
+.parallelNextState span
+{
+    display:inline-block;
+}
+
+.entryExit
+{
+    padding-bottom: 0.2em;
+    padding-left: 0.2em;
+    overflow: auto;
+    position: relative;
+    
+}
+
+.onEntryExitIcon
+{
+    height: auto;
+    width: auto;
+    margin: 0px;
+    display: inline;
+    float: left;
+    position: relative;
+}
+
+.stateSeparator
+{
+    display: block;
+}
+
+.entryExitTransitionSeparator
+{
+    display: block;
+}
+
+.transitions
+{
+    position: relative;
+    display: block;
+    margin: 0em;
+}
+
+.transition
+{
+    overflow: auto;
+    position: relative;
+    cursor: pointer;
+    margin: 0 0em;
+}
+
+.transition p, .entryExit p
+{
+    margin: 0px;
+}
+
+.stateTitle
+{
+    text-align: center;
+    cursor: pointer;
+    margin:0em;
+    padding:0.2em;
+    border-width:0 !important;
+}
+
+.tagName
+{
+    font-style: italic;
+}
+
+.actionContent
+{
+    font-family: Consolas;
+}
+
+.code
+{
+    font-family: Consolas !important;
+}
+
+/* Entry Exit Table */
+
+.entryExitTable
+{
+    display:block;
+    border-collapse: collapse;
+    position: relative;
+    border-spacing: 0px;
+    display: table-row;
+}
+
+.entryExitTable .entryExitLabel, .entryExitTable .actions
+{
+    /*padding: 3px 3px 2px 3px;*/
+}
+
+.entryExitTable .actions
+{
+}
+
+.action
+{
+    text-align: left;
+    cursor: pointer;
+}
+
+.Entry
+{
+    margin:20px !important;
+    padding:20px !important;
+}
+
+.entryExitTable .entryExitLabel
+{
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* Transition Table */
+
+.transitionTable
+{
+    border-collapse: collapse;
+    position: relative;
+    display: table-row;
+    /*width: auto;*/
+    margin: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-spacing:0em;
+}
+
+.transitionTable th, .transitionTable td
+{
+    /*padding: 3px 3px 2px 3px*/;
+}
+
+.transitionTable th
+{
+    font-style: italic;
+    font-weight: normal;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+}
+
+.transitionTable td
+{
+}
+
+#InputCondition
+{
+    font-style: italic;
+    width: auto;
+}
+
+#InputCondition.active
+{
+    font-style: normal;
+    color: Black;
+    width: auto;
+    font-family: Consolas;
+}
+
+
+
+#SelectParallelNextState
+{
+    display:inline;
+}
+
+.ui-autocomplete-input
+{
+    /*display:inline;*/
+    /*width:90%;*/
+    /*padding:0.25em*/
+}
+
+.ui-button { margin-left: -1px; }
+.ui-button-icon-only .ui-button-text { padding: 0.1em; } 
+
+label, input, select
+{
+    /*display: block;*/
+    margin-bottom: 0.5em;
+}
+/*
+fieldset  label, fieldset  input {
+  display:inline-block;
+}
+*/
+
+fieldset {
+  width:auto;
+}
+
+fieldset table{
+  width:auto;
+}
+
+
+fieldset  label {
+  float:right;
+  text-align:right;
+}
+	
+input
+{
+    min-width:30em;
+}
+
+input[type="text"]
+{
+     min-width:30em;
+}
+
+fieldset
+{
+    padding: 0;
+    border: 0;
+    margin-top: 0px;
+}
+
+/* simple css-based tooltip */
+.tooltip
+{
+    padding: 0px;
+    display: none;
+    color: #fff;
+    text-align: left;
+    font-size: 12px;
+}
+
+.ui-tooltip-content
+{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.Dialog
+{
+    display: none;
+}
+
+.DrillDownContainer
+{
+    /*float: left;*/
+    width: 200px; /*height:300px;*/
+    height:auto;
+    margin: 0px;
+    border-width:0px;
+    visibility:visible;
+    
+    
+}
+
+.fg-button
+{
+    outline: 0;
+    margin: 0 4px 0 0;
+    padding: .4em 1em;
+    text-decoration: none !important;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    zoom: 1;
+}
+
+.fg-button .ui-icon
+{
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    left: 50%;
+    margin-left: -8px;
+}
+
+
+
+a.fg-button
+{
+    float: left;
+}
+
+button.fg-button
+{
+    width: auto;
+    overflow: visible;
+}
+
+.fg-button-icon-left
+{
+    padding-left: 2.1em;
+}
+
+.fg-button-icon-right
+{
+    padding-right: 2.1em;
+}
+
+.fg-button-icon-left .ui-icon
+{
+    right: auto;
+    left: .2em;
+    margin-left: 0;
+}
+
+.fg-button-icon-right .ui-icon
+{
+    left: auto;
+    right: .2em;
+    margin-left: 0;
+}
+
+
+
+.fg-button-icon-solo
+{
+    display: block;
+    width: 8px;
+    text-indent: -9999px;
+}
+/* solo icon buttons must have block properties for the text-indent to work */
+
+
+
+.fg-buttonset
+{
+    float: left;
+}
+
+.fg-buttonset .fg-button
+{
+    float: left;
+    margin-right:0.3em;
+}
+
+.fg-buttonset-single .fg-button, .fg-buttonset-multi .fg-button
+{
+    margin-right: -1px;
+}
+
+
+
+.fg-toolbar
+{
+    padding: .3em;
+    margin: 0;
+    width:auto;
+}
+
+.fg-toolbar .fg-buttonset
+{
+    margin-right: 1.5em;
+    padding-left: 1px;
+}
+
+
+.fg-toolbar .fg-button
+{
+    font-size: 0.7em;
+}
+
+
