@@ -202,7 +202,10 @@ module.exports = function (grunt) {
                     cwd: '<%= config.app %>',
                     dest: '<%= config.dist %>',
                     src: [
-                        'img/*.{ico,png}',
+                        'images/*.{ico,png}',
+                        'examples/cpp/*.fsmcpp',
+                        'examples/java/*.fsmjava',
+                        'examples/dotnet/*.fsmcs',
                         '{,*/}*.html',
                         'styles/fonts/{,*/}*.*'
                     ]

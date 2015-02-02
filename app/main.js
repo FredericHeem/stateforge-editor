@@ -1,5 +1,11 @@
 'use strict';
 
+$(document).ready(function () {
+    var stateMachineExamples = require('./StateMachineExamples.js');
+    stateMachineExamples.examplesCreateAll();
+});
+
+
 var StateMachineController = require('../lib/StateMachineController.js');
 
 

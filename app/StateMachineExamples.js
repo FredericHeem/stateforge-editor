@@ -1,5 +1,5 @@
 // StateMachineExamples.js
-// All rights reserved 2011-2013, StateForge.
+// All rights reserved 2011-2015, StateForge.
 // Frederic Heem - frederic.heem@gmail.com
 
 var examplesDotNetArray = new Array(
@@ -91,61 +91,12 @@ function examplesCreate(div, array, urlPrefix, fileSuffix) {
         examplesDiv.appendChild(li);
         var anchor = document.createElement("a");
         li.appendChild(anchor);
-        anchor.setAttribute("href", "/StateMachineDiagram/StateMachineDiagram.html?fsmUrl=" + getStateMachineUrlFromName(example, urlPrefix, fileSuffix) + "#");
+        anchor.setAttribute("href", "/index.html?fsmUrl=" + getStateMachineUrlFromName(example, urlPrefix, fileSuffix) + "#");
         anchor.setAttribute("class", "SateMachineExample");
         anchor.appendChild(document.createTextNode(example));
     }
 }
 
-$(document).ready(function () {
-
-    if (jQuery('#examplesCarousel').size() == 0) {
-        return
-    }
-
-    jQuery('#examplesCarousel').jcarousel({
-        scroll: 1,
-        itemLoadCallback: mycarousel_itemLoadCallback,
-        auto: 4,
-        wrap: 'last',
-        initCallback: mycarousel_initCallback
-    });
-});
-
-function mycarousel_initCallback(carousel) {
-    // Disable autoscrolling if the user clicks the prev or next button.
-    carousel.buttonNext.bind('click', function () {
-        carousel.startAuto(0);
-    });
-
-    carousel.buttonPrev.bind('click', function () {
-        carousel.startAuto(0);
-    });
-
-    // Pause autoscrolling if the user moves with the cursor over the clip.
-    carousel.clip.hover(function () {
-        carousel.stopAuto();
-    }, function () {
-        carousel.startAuto();
-    });
-};
-
-function mycarousel_itemLoadCallback(carousel, state) {
-    // Since we get all URLs in one file, we simply add all items
-    // at once and set the size accordingly.
-    if (state != 'init')
-        return;
-
-    var array = screenshootArray;
-    for (i = 0; i < array.length; i++) {
-        var example = array[i]
-        carousel.add(i + 1, mycarousel_getItemHTML(array[i]));
-    }
-
-    carousel.size(array.length);
-};
-
-function mycarousel_getItemHTML(name) {
-    var url = "/StateMachineDiagram/Img/" + name + "StateMachine.png"
-    return '<img src="' + url + '" alt="' + name + '" />';
+module.exports = {
+        examplesCreateAll:examplesCreateAll
 };
