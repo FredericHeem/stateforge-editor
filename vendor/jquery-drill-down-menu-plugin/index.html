@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="all" />
+<title>jQuery Drill Down Menu Plugin v 1.2</title>
+<link href="css/dcdrilldown.css" rel="stylesheet" type="text/css" />
+<link href="css/skins/graphite.css" rel="stylesheet" type="text/css" />
+<link href="css/skins/blue.css" rel="stylesheet" type="text/css" />
+<link href="css/skins/grey.css" rel="stylesheet" type="text/css" />
+<link href="css/skins/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/jquery.dcdrilldown.1.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function($){
+	$('#drilldown-1').dcDrilldown();
+	$('#drilldown-2').dcDrilldown({
+			speed       	: 'fast',
+			saveState		: true,
+			showCount		: true,
+			linkType		: 'link',
+			backText		: 'All',
+			defaultText		: 'Select Option'
+	});
+	$('#drilldown-3').dcDrilldown({
+			speed       	: 'slow',
+			saveState		: true,
+			showCount		: false,
+			linkType		: 'breadcrumb'
+	});
+	$('#drilldown-4').dcDrilldown({
+			speed       	: 'fast',
+			saveState		: false,
+			showCount		: false,
+			linkType		: 'backlink'
+	});
+});
+</script>
+</head>
+<body>
+<div class="wrap">
+<h2>jQuery Drill Down Menu Plugin v 1.2 - <a href="http://www.designchemical.com/lab/jquery-drill-down-ipod-menu-plugin/getting-started/">Visit Plugin Site</a></h2>
+<div class="graphite demo-container">
+<ul id="drilldown-1">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a>
+        <ul>
+            <li><a href="#">Mobile Phones &#038; Accessories</a>
+                <ul>
+                    <li><a href="#">Product 1</a>
+					  <ul>
+						<li><a href="#">Part A</a>
+						  <ul>
+						    <li><a href="#">Sale</a>
+        <ul>
+            <li><a href="#">Special Offers</a>
+    <ul>
+        <li><a href="#">Offer 1</a></li>
+        <li><a href="#">Offer 2</a></li>
+        <li><a href="#">Offer 3</a></li>
+    </ul>
+    </li>
+    <li><a href="#">Reduced Price</a>
+    <ul>
+        <li><a href="#">Offer 4</a></li>
+        <li><a href="#">Offer 5</a></li>
+        <li><a href="#">Offer 6</a></li>
+        <li><a href="#">Offer 7</a></li>
+    </ul>
+</li>
+    <li><a href="#">Clearance Items</a>
+    <ul>
+        <li><a href="#">Offer 9</a></li>
+ 
+    </ul>
+</li>
+    <li class="menu-item-129"><a href="#">Ex-Stock</a>
+    <ul>
+        <li><a href="#">Offer 10</a></li>
+        <li><a href="#">Offer 11</a></li>
+        <li><a href="#">Offer 12</a></li>
+        <li><a href="#">Offer 13</a></li>
+    </ul>
+</li>
+</ul>
+</li>
+						  </ul>
+						</li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 2</a
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+					<li><a href="#">Product 3</a>
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Desktop</a>
+                <ul>
+                    <li><a href="#">Product 4</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 5</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 6</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 7</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 8</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 9</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Laptop</a>
+                <ul>
+                    <li><a href="#">Product 10</a></li>
+                    <li><a href="#">Product 11</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 12</a></li>
+                    <li><a href="#">Product 13</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Accessories</a>
+                <ul>
+                    <li><a href="#">Product 14</a></li>
+                    <li><a href="#">Product 15</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Software</a>
+              <ul>
+                <li><a href="#">Product 16</a></li>
+                    <li><a href="#">Product 17</a></li>
+                    <li><a href="#">Product 18</a></li>
+                    <li><a href="#">Product 19</a></li>
+              </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</div>
+<div class="grey demo-container">
+<ul id="drilldown-2">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a>
+        <ul>
+            <li><a href="#">Mobile Phones &#038; Accessories</a>
+                <ul>
+                    <li><a href="#">Product 1</a>
+					  <ul>
+						<li><a href="#">Part A</a>
+						  <ul>
+						    <li><a href="#">Sale</a>
+        <ul>
+            <li><a href="#">Special Offers</a>
+    <ul>
+        <li><a href="#">Offer 1</a></li>
+        <li><a href="#">Offer 2</a></li>
+        <li><a href="#">Offer 3</a></li>
+    </ul>
+    </li>
+    <li><a href="#">Reduced Price</a>
+    <ul>
+        <li><a href="#">Offer 4</a></li>
+        <li><a href="#">Offer 5</a></li>
+        <li><a href="#">Offer 6</a></li>
+        <li><a href="#">Offer 7</a></li>
+    </ul>
+</li>
+    <li><a href="#">Clearance Items</a>
+    <ul>
+        <li><a href="#">Offer 9</a></li>
+ 
+    </ul>
+</li>
+    <li class="menu-item-129"><a href="#">Ex-Stock</a>
+    <ul>
+        <li><a href="#">Offer 10</a></li>
+        <li><a href="#">Offer 11</a></li>
+        <li><a href="#">Offer 12</a></li>
+        <li><a href="#">Offer 13</a></li>
+    </ul>
+</li>
+</ul>
+</li>
+						  </ul>
+						</li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 2</a
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+					<li><a href="#">Product 3</a>
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Desktop</a>
+                <ul>
+                    <li><a href="#">Product 4</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 5</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 6</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 7</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 8</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 9</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Laptop</a>
+                <ul>
+                    <li><a href="#">Product 10</a></li>
+                    <li><a href="#">Product 11</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 12</a></li>
+                    <li><a href="#">Product 13</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Accessories</a>
+                <ul>
+                    <li><a href="#">Product 14</a></li>
+                    <li><a href="#">Product 15</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Software</a>
+              <ul>
+                <li><a href="#">Product 16</a></li>
+                    <li><a href="#">Product 17</a></li>
+                    <li><a href="#">Product 18</a></li>
+                    <li><a href="#">Product 19</a></li>
+              </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</div>
+<div class="demo-dd demo-container">
+<ul id="drilldown-3">
+    <li><a href="#">Home</a>
+	  <ul>
+		<li><a href="#">Page 1</a></li>
+		<li><a href="#">Page 2</a></li>
+		<li><a href="#">Page 3</a></li>
+		<li><a href="#">Page 4</a></li>
+	  </ul>
+	</li>
+    <li><a href="#">Products</a>
+        <ul>
+            <li><a href="#">Mobile Phones &#038; Accessories</a>
+                <ul>
+                    <li><a href="#">Product 1</a>
+					  <ul>
+						<li><a href="#">Part A</a>
+						  <ul>
+						    <li><a href="#">Sale</a>
+        <ul>
+            <li><a href="#">Special Offers</a>
+    <ul>
+        <li><a href="#">Offer 1</a></li>
+        <li><a href="#">Offer 2</a></li>
+        <li><a href="#">Offer 3</a></li>
+    </ul>
+    </li>
+    <li><a href="#">Reduced Price</a>
+    <ul>
+        <li><a href="#">Offer 4</a></li>
+        <li><a href="#">Offer 5</a></li>
+        <li><a href="#">Offer 6</a></li>
+        <li><a href="#">Offer 7</a></li>
+    </ul>
+</li>
+    <li><a href="#">Clearance Items</a>
+    <ul>
+        <li><a href="#">Offer 9</a></li>
+ 
+    </ul>
+</li>
+    <li class="menu-item-129"><a href="#">Ex-Stock</a>
+    <ul>
+        <li><a href="#">Offer 10</a></li>
+        <li><a href="#">Offer 11</a></li>
+        <li><a href="#">Offer 12</a></li>
+        <li><a href="#">Offer 13</a></li>
+    </ul>
+</li>
+</ul>
+</li>
+						  </ul>
+						</li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 2</a
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+					<li><a href="#">Product 3</a>
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Desktop</a>
+                <ul>
+                    <li><a href="#">Product 4</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 5</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 6</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 7</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 8</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 9</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Laptop</a>
+                <ul>
+                    <li><a href="#">Product 10</a></li>
+                    <li><a href="#">Product 11</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 12</a></li>
+                    <li><a href="#">Product 13</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Accessories</a>
+                <ul>
+                    <li><a href="#">Product 14</a></li>
+                    <li><a href="#">Product 15</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Software</a>
+              <ul>
+                <li><a href="#">Product 16</a></li>
+                    <li><a href="#">Product 17</a></li>
+                    <li><a href="#">Product 18</a></li>
+                    <li><a href="#">Product 19</a></li>
+              </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</div>
+<div class="clear"></div>
+<div class="blue demo-container">
+<ul id="drilldown-4">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Products</a>
+        <ul>
+            <li><a href="#">Mobile Phones &#038; Accessories</a>
+                <ul>
+                    <li><a href="#">Product 1</a>
+					  <ul>
+						<li><a href="#">Part A</a>
+						  <ul>
+						    <li><a href="#">Sale</a>
+        <ul>
+            <li><a href="#">Special Offers</a>
+    <ul>
+        <li><a href="#">Offer 1</a></li>
+        <li><a href="#">Offer 2</a></li>
+        <li><a href="#">Offer 3</a></li>
+    </ul>
+    </li>
+    <li><a href="#">Reduced Price</a>
+    <ul>
+        <li><a href="#">Offer 4</a></li>
+        <li><a href="#">Offer 5</a></li>
+        <li><a href="#">Offer 6</a></li>
+        <li><a href="#">Offer 7</a></li>
+    </ul>
+</li>
+    <li><a href="#">Clearance Items</a>
+    <ul>
+        <li><a href="#">Offer 9</a></li>
+ 
+    </ul>
+</li>
+    <li class="menu-item-129"><a href="#">Ex-Stock</a>
+    <ul>
+        <li><a href="#">Offer 10</a></li>
+        <li><a href="#">Offer 11</a></li>
+        <li><a href="#">Offer 12</a></li>
+        <li><a href="#">Offer 13</a></li>
+    </ul>
+</li>
+</ul>
+</li>
+						  </ul>
+						</li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 2</a
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+					<li><a href="#">Product 3</a>
+					  <ul>
+						<li><a href="#">Part A</a></li>
+						<li><a href="#">Part B</a></li>
+						<li><a href="#">Part C</a></li>
+						<li><a href="#">Part D</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Desktop</a>
+                <ul>
+                    <li><a href="#">Product 4</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 5</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 6</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 7</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 8</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 9</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                </ul>
+            </li>
+            <li><a href="#">Laptop</a>
+                <ul>
+                    <li><a href="#">Product 10</a></li>
+                    <li><a href="#">Product 11</a>
+					  <ul>
+						<li><a href="#">Part E</a></li>
+						<li><a href="#">Part F</a></li>
+						<li><a href="#">Part G</a></li>
+						<li><a href="#">Part H</a></li>
+					  </ul>
+					</li>
+                    <li><a href="#">Product 12</a></li>
+                    <li><a href="#">Product 13</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Accessories</a>
+                <ul>
+                    <li><a href="#">Product 14</a></li>
+                    <li><a href="#">Product 15</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Software</a>
+              <ul>
+                <li><a href="#">Product 16</a></li>
+                    <li><a href="#">Product 17</a></li>
+                    <li><a href="#">Product 18</a></li>
+                    <li><a href="#">Product 19</a></li>
+              </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</div>
+<div class="clear"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{
+  "name": "state-diagram-editor",
+  "description": "an online state diagram editor",
+  "version": "0.0.3",
+  "main": "lib/StateDiagramEditor.js",
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:FredericHeem/StateDiagramEditor.git"
+  },
+  "author": {
+      "name": "Frederic Heem",
+      "email": "frederic@gmail.com"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha": "1.21.4",
+    "grunt-cli": "0.1.13",
+    "grunt": "~0.4.5",
+    "grunt-contrib-copy": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-contrib-connect": "~0.8.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-htmlmin": "~0.3.0",
+    "grunt-bower-install": "~1.6.0",
+    "grunt-contrib-imagemin": "~0.8.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-usemin": "~2.4.0",
+    "grunt-mocha": "~0.4.11",
+    "grunt-ejs": "0.2.0",
+    "grunt-concurrent": "~1.0.0",
+    "load-grunt-tasks": "~0.6.0",
+    "time-grunt": "~1.0.0",
+    "jshint-stylish": "~1.0.0",
+    "browserify": "5.12.1",
+    "grunt-browserify": "x",
+    "browserify-ejs": "0.0.2",
+    "grunt-shell": "~1.1.1",
+    "konphyg": "1.4.x",
+    "request": "~2.44.0",
+    "async": "~0.9.0",
+    "debug": "2.0.x",
+    "supertest": "0.13.0",
+    "underscore":"1.7.0",
+    "coveralls": "~2.11.2",
+    "istanbul": "0.3.2",
+    "mocha-lcov-reporter": "0.0.1",
+    "codeclimate-test-reporter": "x"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "./node_modules/grunt-cli/bin/grunt serve",
+    "test": "NODE_ENV=demo ./node_modules/mocha/bin/mocha",
+    "coverage": "NODE_ENV=demo istanbul cover _mocha -- test/*.js",
+    "coveralls": "npm run-script coverage && coveralls < coverage/lcov.info",
+    "codeclimate": "CODECLIMATE_REPO_TOKEN=aa codeclimate < coverage/lcov.info"
+  },
+  "readmeFilename": "README.md"
+}

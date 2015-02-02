@@ -1,0 +1,17 @@
+.grey .dd-wrapper {border: 0px solid #ccc;}
+.grey .dd-menu {border-top: 0px solid #ccc;}
+.grey .dd-menu a {text-decoration: none; padding: 10px 10px 10px 10px; display: block; border-bottom: 0px solid #ccc; border-top: 0px solid #fff; position: relative}
+.grey .dd-menu a:hover {}
+.grey .dd-menu li a .dd-icon {position: absolute; margin:1px; padding:1px; right:10px; top: 50%; width: 16px; margin-top: -8px; height: 16px; }
+.grey .dd-menu li.dd-parent a.dd-parent-a{}
+.grey .dd-menu li.dd-parent a:hover {}
+.grey .dd-menu li.dd-parent a.active .dd-icon {}
+.grey .dd-menu li.dd-parent a.active {}
+.grey .dd-header {border-width:0px;}
+.grey .dd-header ul {width: 100%; overflow: hidden; line-height: 1.5em; padding: 5px 10px;}
+.grey .dd-header li {display: inline;}
+.grey .dd-header li a {text-decoration: none; float: left; display: block; padding: 1px 15px 1px 5px; background: url(images/arrow_red_right.png) no-repeat 100% center}
+.grey .dd-header li a:hover {text-decoration: underline;}
+.grey .dd-header a.link-back {text-decoration: none; display: block; padding: 5px 10px 0 20px; background: url(images/arrow_red_left.png) no-repeat 0 center}
+.grey .dd-header h3 {clear: both; padding: 10px 10px; margin: 0; font-size: 1.1em;}
+.grey .dd-header h3 .dd-count {display: none;}

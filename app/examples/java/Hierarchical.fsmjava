@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineJava-v1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.stateforge.com/StateMachineJava-v1
+                                     http://www.stateforge.com/xsd/StateMachineJava-v1.xsd">
+    <!-- General settings -->
+    <settings asynchronous="true" namespace="com.stateforge.statemachine.examples.PelicanCrossing" >
+        <description>An example of a hierarchical state machine</description>
+        <object instance="vehical" class="Vehical"/>
+        <object instance="pedestrian" class="Pedestrian"/>
+    </settings>
+
+    <!-- Events -->
+    <events>
+        <eventSource name="Management">
+            <event id="start"/>
+            <event id="stop"/>
+        </eventSource>
+        <eventSource name="Timers">
+            <timer name="PedestrianTimer" id="evPedestrianTimer"/>
+            <timer name="VehicalTimer" id="evVehicleTimer"/>
+        </eventSource>
+    </events>
+
+    <!-- States -->
+    <state name="Root">
+        <state name="Init">
+        </state>
+        <state name="Operational">
+            <state name="Vehicle">
+                <state name="Green">
+                </state>
+                <state name="Yellow">
+                </state>
+            </state>
+            <state name="Pedestrian">
+                <state name="Walk">
+                </state>
+                <state name="Flash">
+                    <state name="FlashOff">
+                    </state>
+                    <state name="FlashOn">
+                    </state>
+                </state>
+            </state>
+        </state>
+        <state name="Off" kind="final"/>
+    </state>
+</sm:StateMachine>
+
