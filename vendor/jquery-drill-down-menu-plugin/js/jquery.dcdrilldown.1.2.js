@@ -102,7 +102,8 @@
 				var maxItems = findMaxHeight(objUl);
 
 				// Get level of largest sub menu
-				var maxUl = $(objUl+'[rel="'+maxItems+'"]');
+				//var maxUl = $(objUl+'[rel="'+maxItems+'"]');
+				var maxUl = $(objUl.attr('id')+'[rel="'+maxItems+'"]'); 
 				var getIndex = findMaxIndex(maxUl);
 
 				// Set menu container height
@@ -151,7 +152,7 @@
 			}
 
 			// Breadcrumbs
-			$('#'+idHeader+' a').live('click',function(e){
+			$('#'+idHeader+' a').on('click',function(e){
 
 				if($(this).hasClass('link-back')){
 					linkIndex = $('#'+idWrapper+' .'+defaults.classParentLink+'.active').length;

@@ -202,6 +202,7 @@ module.exports = function (grunt) {
                     cwd: '<%= config.app %>',
                     dest: '<%= config.dist %>',
                     src: [
+                        'indent.xsl',
                         'images/*.{ico,png}',
                         'examples/cpp/*.fsmcpp',
                         'examples/java/*.fsmjava',
