@@ -152,7 +152,7 @@
 			}
 
 			// Breadcrumbs
-			$('#'+idHeader+' a').on('click',function(e){
+			$(document).on('click','#'+idHeader+' a', function(e){
 
 				if($(this).hasClass('link-back')){
 					linkIndex = $('#'+idWrapper+' .'+defaults.classParentLink+'.active').length;
