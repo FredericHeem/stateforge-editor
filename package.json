@@ -39,18 +39,17 @@
     "grunt-shell": "~1.1.1",
     "grunt-usemin": "~2.4.0",
     "istanbul": "0.3.2",
-    "jsdom": "^3.1.0",
     "jshint-stylish": "~1.0.0",
     "konphyg": "1.4.x",
     "load-grunt-tasks": "~0.6.0",
     "mocha": "1.21.4",
-    "mocha-jsdom": "^0.2.0",
     "mocha-lcov-reporter": "0.0.1",
     "chai":"1.10.0",
     "request": "~2.44.0",
     "supertest": "0.13.0",
     "time-grunt": "~1.0.0",
-    "underscore": "1.7.0"
+    "underscore": "1.7.0",
+    "node-dir":"0.1.6"
   },
   "engines": {
     "node": ">=0.10.0"

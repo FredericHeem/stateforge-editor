@@ -5,9 +5,14 @@ describe('StateMachineModel', function () {
     });
     
     describe('Ok', function () {
-        it('Light.fsmcs', function (done) {
-            var model = new StateForge.StateMachineModel();
-            model.xmlToDom(fsmFile);
+        it('All', function (done) {
+            //console.log("processing ", Object.keys(exampleMap).length)
+            for(var index in exampleMap) { 
+                var fsmContent = exampleMap[index];
+                var model = new StateForge.StateMachineModel();
+                model.xmlToDom(fsmContent);
+            }
+            
             done()
         });
         
