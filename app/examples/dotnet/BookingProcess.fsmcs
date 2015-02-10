@@ -1,0 +1,103 @@
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineDotNet-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stateforge.com/StateMachineDotNet-v1                                      http://www.stateforge.com/xsd/StateMachineDotNet-v1.xsd">
+    <!-- general settings -->
+    <settings asynchronous="true" namespace="StateForge.Examples.BookingProcess">
+        <object instance="controller" class="BookingProcessController"/>
+        <object instance="view" class="BookingProcessView"/>
+        <object instance="printer" class="Printer"/>
+    </settings>
+    <!-- events -->
+    <events>
+        <eventSource name="SystemEvent">
+            <event id="evStop"/>
+        </eventSource>
+        <eventSource name="UserEvent">
+            <event id="evUserStart"/>
+            <event id="evSeatValidSelection"/>
+            <event id="evSeatInvalidSelection"/>
+            <event id="evPromotionNotEligible"/>
+            <event id="evPromotionElegible"/>
+            <event id="evNoPromotionSelected"/>
+            <event id="evUserPaymentValidate"/>
+            <event id="evUserContinue"/>
+            <event id="evUserAbort"/>
+        </eventSource>
+        <eventSource name="PrinterEvent">
+            <event id="evTickedPrinted"/>
+            <event id="evTicketPrintedError"/>
+        </eventSource>
+        <eventSource name="PaymentEvent">
+            <event id="evPaymentSuccess"/>
+            <event id="evPaymentError"/>
+        </eventSource>
+        <eventSource name="TimerEvent">
+            <timer id="evTimerMaxProcessing" name="MaxProcessing"/>
+            <timer id="evTimerError" name="Error"/>
+        </eventSource>
+    </events>
+    <!-- States -->
+    <state name="BookingProcess">
+        <transition event="evStop" nextState="End"/>
+        <state name="WaitForRequest">
+            <onEntry>
+                <action>view.showWelcome()</action>
+            </onEntry>
+            <transition event="evUserStart" nextState="SeatChoosing"/>
+        </state>
+        <state name="Processing">
+            <onEntry>
+                <timerStart timer="MaxProcessing" duration="60000"/>
+            </onEntry>
+            <transition event="evTimerMaxProcessing" nextState="Error">
+                <action>controller.setError(ERROR_TIMOUT)</action>
+            </transition>
+            <transition event="evUserAbort" nextState="End"/>
+            <state name="SeatChoosing">
+                <onEntry>
+                    <action>view.showSeatChoosing()</action>
+                </onEntry>
+                <transition event="evSeatValidSelection" nextState="PromotionSelection"/>
+            </state>
+            <state name="PromotionSelection">
+                <onEntry>
+                    <action>view.showPromotionSelection()</action>
+                </onEntry>
+                <transition event="evPromotionNotEligible" nextState="PromotionSelection"/>
+                <transition event="evPromotionElegible" nextState="PaymentReview"/>
+                <transition event="evNoPromotionSelected" nextState="PaymentReview"/>
+            </state>
+            <state name="PaymentReview">
+                <onEntry>
+                    <action>view.showPaymentReview()</action>
+                </onEntry>
+                <transition event="evUserPaymentValidate" nextState="PaymentValidation"/>
+            </state>
+            <state name="PaymentValidation">
+                <onEntry>
+                    <action>view.showPaymentValidation()</action>
+                    <action>payment.start()</action>
+                </onEntry>
+                <transition event="evPaymentSuccess" nextState="Printing"/>
+                <transition event="evPaymentError" nextState="PaymentReview"/>
+            </state>
+            <state name="Printing">
+                <onEntry>
+                    <action>view.showPrinting()</action>
+                    <action>printer.startPrintTicket()</action>
+                </onEntry>
+                <transition event="evTicketPrintedError" nextState="Error">
+                    <action>printer.signalFailure()</action>
+                </transition>
+                <transition event="evTickedPrinted" nextState="End"/>
+            </state>
+        </state>
+        <state name="Error">
+            <onEntry>
+                <action>view.showError()</action>
+                <timerStart timer="Error" duration="30000"/>
+            </onEntry>
+            <transition event="evUserContinue" nextState="End"/>
+            <transition event="evTimerError" nextState="End"/>
+        </state>
+        <state name="End"/>
+    </state>
+</sm:StateMachine>

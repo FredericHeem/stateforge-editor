@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineJava-v1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.stateforge.com/StateMachineJava-v1
+                                     http://www.stateforge.com/xsd/StateMachineJava-v1.xsd" >
+    <!-- General settings -->
+    <settings asynchronous="true" namespace="com.stateforge.statemachine.examples.PelicanCrossing" >
+        <description>Pelican crossing: a good example of a hierarchical state machine</description>
+        <object instance="vehical" class="Vehical"/>
+        <object instance="pedestrian" class="Pedestrian"/>
+    </settings>
+
+    <!-- Events -->
+    <events>
+        <eventSource name="Management">
+            <event id="start"/>
+            <event id="stop"/>
+        </eventSource>
+        <eventSource name="Timers">
+            <timer name="PedestrianTimer" id="evPedestrianTimer"/>
+            <timer name="VehicalTimer" id="evVehicleTimer"/>
+        </eventSource>
+    </events>
+
+    <!-- States -->
+    <state name="PelicanCrossing">
+        <state name="Init">
+            <transition event="start" nextState="Operational"/>
+        </state>
+        <state name="Operational">
+            <transition event="stop" nextState="Off"/>
+            <state name="Vehicle">
+                <onEntry >
+                    <action>pedestrian.redOn()</action>
+                    <action>vehical.redOff()</action>
+                </onEntry>
+                <state name="Green">
+                    <onEntry>
+                        <action>vehical.greenOn()</action>
+                        <timerStart timer="VehicalTimer" duration="vehical.getDurationGreen()"/>
+                    </onEntry>
+                    <onExit action="vehical.greenOff()"/>
+                    <transition event="evVehicalTimer" nextState="Yellow"/>
+                </state>
+                <state name="Yellow">
+                    <onEntry>
+                        <action>vehical.yellowOn()</action>
+                        <timerStart timer="VehicalTimer" duration="vehical.getDurationYellow()"/>
+                    </onEntry>
+                    <onExit action="vehical.yellowOff()"/>
+                    <transition event="evVehicalTimer" nextState="Pedestrian"/>
+                </state>
+            </state>
+            <state name="Pedestrian">
+                <onEntry>
+                    <action>vehical.redOn()</action>
+                    <action>pedestrian.redOff()</action>
+                </onEntry>
+                <state name="Walk">
+                    <onEntry>
+                        <action>pedestrian.greenOn()</action>
+                        <timerStart timer="PedestrianTimer" duration="pedestrian.getDurationWalk()"/>
+                    </onEntry>
+                    <onExit action="pedestrian.greenOff()"/>
+                    <transition event="evPedestrianTimer" nextState="Flash"/>
+                </state>
+                <state name="Flash">
+                    <onEntry action="pedestrian.flashCountReset()"/>
+                    <state name="FlashOff">
+                        <onEntry>
+                            <action>pedestrian.flashCountDecrease()</action>
+                            <timerStart timer="PedestrianTimer" duration="pedestrian.getDurationFlashOff()"/>
+                        </onEntry>
+                        <transition event="evPedestrianTimer" nextState="FlashOn"/>
+                    </state>
+                    <state name="FlashOn">
+                        <onEntry>
+                            <action>pedestrian.greenOn()</action>
+                            <timerStart timer="PedestrianTimer" duration="pedestrian.getDurationFlashOn()"/>
+                        </onEntry>
+                        <onExit action="pedestrian.greenOff()"/>
+                        <transition event="evPedestrianTimer" condition="pedestrian.flashCountReached() == true" nextState="Vehicle"/>
+                        <transition event="evPedestrianTimer" nextState="FlashOff"/>
+                    </state>
+                </state>
+            </state>
+        </state>
+        <state name="Off" kind="final"/>
+    </state>
+</sm:StateMachine>

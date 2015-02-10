@@ -1,0 +1,54 @@
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineJava-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stateforge.com/StateMachineJava-v1                                      http://www.stateforge.com/xsd/StateMachineJava-v1.xsd">
+    <!-- General settings -->
+    <settings asynchronous="true" namespace="org.opencoin.client">
+        <object instance="client" class="RippleWsClient" namespace="org.opencoin.client"/>
+    </settings>
+    <!-- events -->
+    <events>
+        <eventSource name="Client">
+            <event id="evConnect"/>
+            <event id="evDisconnect"/>
+        </eventSource>
+        <eventSource name="Internal">
+            <event id="evCommand"/>
+        </eventSource>
+        <eventSource name="Server">
+            <event id="evError"/>
+            <event id="evConnected"/>
+        </eventSource>
+        <eventSource name="Timers">
+            <timer id="evTimerRetry" name="TimerRetry"/>
+        </eventSource>
+    </events>
+    <!-- States -->
+    <state name="RippleWsClient">
+        <transition event="evDisconnect" nextState="Disconnected">
+            <action>client.doDisconnect()</action>
+            <action>client.onDisconnected()</action>
+        </transition>
+        <transition event="evError" nextState="Disconnected">
+        </transition>
+        <state name="Disconnected">
+            <transition event="evConnect" nextState="Connecting">
+                <action>client.doConnect()</action>
+            </transition>
+            <transition event="evCommand" nextState="Connecting">
+                <action>client.doConnect();</action>
+            </transition>
+        </state>
+        <state name="Connecting">
+            <transition event="evConnected" nextState="Connected">
+                <action>client.doSendCommand()</action>
+            </transition>
+        </state>
+        <state name="Connected">
+            <onEntry>
+                <action>client.onConnected()</action>
+                <action/>
+            </onEntry>
+            <transition event="evConnect" nextState="Connected">
+                <action/>
+            </transition>
+        </state>
+    </state>
+</sm:StateMachine>

@@ -1,0 +1,46 @@
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineJava-v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.stateforge.com/StateMachineJava-v1                                      http://www.stateforge.com/xsd/StateMachineJava-v1.xsd">
+    <!-- General settings -->
+    <settings asynchronous="true" namespace="com.coinfeed.marketfeed.fetcher.statemachine">
+        <object instance="feed" class="FeedFetcher" namespace="com.coinfeed.marketfeed.fetcher"/>
+    </settings>
+    <!-- events -->
+    <events>
+        <eventSource name="External">
+            <event id="evStart"/>
+            <event id="evStop"/>
+        </eventSource>
+        <eventSource name="Internal">
+            <event id="evError"/>
+            <event id="evFetched"/>
+        </eventSource>
+        <eventSource name="Timers">
+            <timer id="evTimerRetry" name="TimerRetry"/>
+        </eventSource>
+    </events>
+    <!-- States -->
+    <state name="FeedFetcher">
+        <state name="Idle">
+            <transition event="evStart" nextState="Operating"/>
+        </state>
+        <state name="Operating">
+            <onExit>
+                <action>feed.stop()</action>
+            </onExit>
+            <transition event="evStop" nextState="End"/>
+            <state name="Fetching">
+                <onEntry>
+                    <action>feed.fetch()</action>
+                </onEntry>
+                <transition event="evFetched" nextState="Waiting"/>
+                <transition event="evError" nextState="Waiting"/>
+            </state>
+            <state name="Waiting">
+                <onEntry>
+                    <timerStart timer="TimerRetry" duration="feed.getConfig().getPollingPeriod()"/>
+                </onEntry>
+                <transition event="evTimerRetry" nextState="Fetching"/>
+            </state>
+        </state>
+        <state name="End" kind="final"/>
+    </state>
+</sm:StateMachine>

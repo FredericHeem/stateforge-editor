@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sm:StateMachine xmlns:sm="http://www.stateforge.com/StateMachineJava-v1"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://www.stateforge.com/StateMachineJava-v1
+                                     http://www.stateforge.com/xsd/StateMachineJava-v1.xsd">
+    <!-- General settings -->
+    <settings asynchronous="true" namespace="com.stateforge.statemachine.examples.Concurrent" >
+        <description>An example of a concurrent state machine</description>
+        <object instance="chatScenario" class="ChatScenario"/>
+        <object instance="alice" class="Client"/>
+        <object instance="bob" class="Client"/>
+    </settings>
+
+    <!-- events -->
+    <events>
+        <eventSource name="Timer">
+            <timer id="EvTimerMaxDuration" name="TimerMaxDuration"/>
+        </eventSource>
+    </events>
+
+    <!-- States -->
+    <state name="Root">
+        <!-- State Idle -->
+        <state name="Idle">
+        </state>
+        
+        <!-- State Login -->
+        <state name="Login">
+            <parallel nextState="Closing">
+                <!-- Machine Alice -->
+                <state name="AliceLogin">
+                    <!-- State Alice_Login -->
+                    <state name="Alice_Login" description="Alice logins">
+                    </state>
+                    <!-- State Alice_WaitPresence -->
+                    <state name="Alice_WaitPresence" description="Alice wait for presence">
+                    </state>                    
+                    <!-- State Alice_Login_End -->
+                    <state name="Alice_Login_End" kind="final"/>
+                </state>
+
+                <!-- Machine Bob -->
+                <state name="BobLogin">
+                    <!-- State Bob_Login -->
+                    <state name="Bob_Login" description="Bob logins">
+                    </state>
+                    <!-- State Bob_WaitPresence -->
+                    <state name="Bob_WaitPresence" description="Alice wait for presence">
+                    </state>
+                    <!-- State Bob_Login_End -->
+                    <state name="Bob_Login_End" kind="final"/>
+                </state>
+            </parallel>
+        </state>
+
+        <state name="Closing" description="Everyone is closing">
+        </state>
+        <state name="End" kind="final"/>
+    </state>
+</sm:StateMachine>

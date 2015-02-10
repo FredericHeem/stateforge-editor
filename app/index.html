@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>State Machine Diagram Editor</title>
+    <meta name="keywords" content="state chart, statechart, state machine diagram, state diagram, state machine, finite state machine, fsm, state pattern, state machine pattern, code generator" />
+    <meta name="description" content="The state machine diagram editor is a software tool to visualize and edit state machines." />
+    <meta name="author" content="Frederic Heem" />
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/qtip2/jquery.qtip.min.css" />
+
+<!--     <script src="../vendor/jquery-1.6.1.min.js"></script> -->
+<!--     <script src="../vendor/jquery-ui-1.8.16.custom.min.js"></script> -->
+    
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
+    
+<!--     <script src="src/theme-clouds.js" type="text/javascript" charset="utf-8"></script> -->
+<!--     <script src="src/mode-xml.js" type="text/javascript" charset="utf-8"></script> -->
+	
+    <link href="../vendor/jquery-drill-down-menu-plugin/css/dcdrilldown.css" rel="stylesheet"
+        type="text/css" />
+    <link href="../vendor/jquery-drill-down-menu-plugin/css/skins/grey.css" rel="stylesheet"
+        type="text/css" />
+    <link href="../vendor/jquery-drill-down-menu-plugin/css/skins/demo.css" rel="stylesheet"
+        type="text/css" />
+    <link type="text/css" href="../vendor/jquery-ui-1.8.16.custom.css" rel="stylesheet" />
+<!--     <link rel="stylesheet" type="text/css" href="/Content/js/jcarousel/skins/ie7/skin.css" /> -->
+    <script type="text/javascript" src="../bower_components/modernizr/modernizr.js"></script>
+    <script type="text/javascript" src="../bower_components/qtip2/jquery.qtip.min.js"></script>
+    <script src="../vendor/jquery-drill-down-menu-plugin/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../vendor/jquery-drill-down-menu-plugin/js/jquery.dcdrilldown.1.2.js"
+        type="text/javascript"></script>
+    <script type="text/javascript" src="../vendor/jquery.themeswitcher.js"></script>
+        
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="app.js"></script>
+    
+<!--     <script type="text/javascript" src="StateMachineEditor.js"></script> -->
+    
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-24274725-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<body class="ui-widget-content">
+ <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div>
+        <div id="TopMenu" class="ui-widget-header">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/Home/Download">Downloads</a></li>
+                <li><a href="/Help/state-machine-tools.aspx">Help</a></li>
+                <li><a href="/Home/About">Contact us</a></li>
+            </ul>
+        </div>
+        <div id="TabView">
+            <ul>
+                <li><a href="#tabWelcome"><em>Welcome</em></a> </li>
+                <li><a href="#tabDiagram"><em>Diagram</em></a> </li>
+                <li><a href="#tabEvents"><em>Events</em></a> </li>
+                <li><a href="#tabXmlModel"><em>Xml Model</em></a> </li>
+            </ul>
+            <div id="tabWelcome">
+                <div id="Header">
+                    <div id="Logo">
+                        <a href="http://www.stateforge.com">
+                            <img alt="www.stateforge.com" src="images/StateForgeLogo.png" border="0"
+                                width="100" height="100" /></a>
+                    </div>
+                    <div id="HeaderContent">
+                        <h2 id="MainTitle">
+                            Finite State Machine Diagram Editor and Source Code Generator</h2>
+                    </div>
+                </div>
+                <div id="WelcomeInfo">
+                    <p>
+                        Welcome to the Finite State Machine Diagram Editor, this tool allows software developers
+                        to model UML Finite State Machines either graphically or textually.
+                    </p>
+                    <p>
+                        A different approach is used compared to other state machine diagram editor, there
+                        is absolutely no manual layout involved, the placement is performed automatically.
+                    </p>
+                    <p>
+                        First of all, select a finite state machine example from the list below, the UML
+                        state machine diagram, also known as statechart, will be generated on the fly from
+                        its XML model.
+                    </p>
+                    <p>
+                        To generate the source code, download <a href="../Home/Download">StateBuilderDotNet</a>
+                        , <a href="../Home/Download">StateBuilderCpp</a> or <a href="../Home/Download">StateBuilderJava</a>
+                        depending on the target language: C#/VB.net, C++ or Java.
+                    </p>
+                </div>
+                <div id="examples">
+                    <table id="examplesTable" class="ui-widget">
+                        <thead class="ui-widget-header">
+                            <tr>
+                                <th>
+                                    C#
+                                </th>
+                                <th>
+                                    C++
+                                </th>
+                                <th>
+                                    Java
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <ul id="examplesDotNetUL">
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul id="examplesCppUL">
+                                    </ul>
+                                </td>
+                                <td>
+                                    <ul id="examplesJavaUL">
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="StateMachineSelection">
+                </div>
+            </div>
+            <div id="tabDiagram">
+                <div id="BrowserCheck">
+                </div>
+                <div class="fg-toolbar ui-widget ui-helper-clearfix">
+                    <div class="fg-buttonset">
+                        <button class="Undo fg-button">
+                            Undo</button>
+                        <button class="Redo fg-button">
+                            Redo</button>
+                        <div id="switcher" class="fg-button">
+                        </div>
+                    </div>
+                </div>
+                <div id="StateDiagramError" style="display: none;">
+                    <div class="ui-widget">
+                        <div class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">
+                            <p>
+                                <span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>
+                                <strong>Alert:</strong> <span id="StateDiagramErrorMessage"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="StateMachineDiagram">
+                </div>
+                <div id="StateEditorDesktopAlert">
+                    <div class="ui-widget">
+                        <div class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">
+                            <p>
+                                <span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+                                <a href="../Home/Download">A desktop edition</a> of this state machine diagram web
+                                application is also available.
+                            </p>
+                            <p>
+                                Here are the main advantage of using the desktop edition of this state machine diagram:
+                            </p>
+                            <ul>
+                                <li>State machines can be saved to the local disk</li>
+                                <li>State machines can be opened by double clicking on its file </li>
+                                <li><a href="/Content/Images/TestXmppChatStateMachine.png">State diagram screenshot</a>
+                                    can be taken, even when the state diagram is larger than the screen </li>
+                                <li>Invoke the state machine code generator</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="dialog">
+                    <div id="dialogStateAdd" class="Dialog" title="Add state">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="StateName">
+                                                State name:
+                                            </label>
+                                        </th>
+                                        <td>
+                                            <input id="InputStateAddNew" type="text" title="Enter the new state name here" class="ui-widget-content ui-corner-all"
+                                                name="StateName" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label id="LabelStateAddNewKind" for="SelectStateAddNewKind">
+                                                State kind:
+                                            </label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectStateAddNewKind" class="SelectStateKind ui-widget-content ui-corner-all"
+                                                title="Choose the kind of state" name="SelectStateAddNewKind">
+                                                <option selected="selected"></option>
+                                                <option value="final">Final</option>
+                                                <option value="history">History</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="StateWhere">
+                                                Where to add the state:</label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectStateAddWhere" title="Choose where to add the new state" name="StateWhere"
+                                                class="ui-widget-content ui-corner-all">
+                                                <option value="after" selected="selected">Add after</option>
+                                                <option value="before">Add before</option>
+                                                <option value="below">Add below</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogStateEdit" class="Dialog" title="Edit state">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="StateNameEdit">
+                                                State name:
+                                            </label>
+                                        </th>
+                                        <td>
+                                            <input id="InputStateEdit" type="text" name="StateNameEdit" class="ui-widget-content ui-corner-all" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label id="LabelStateEditKind" for="SelectStateEditKind">
+                                                State kind:
+                                            </label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectStateEditKind" class="SelectStateKind ui-widget-content ui-corner-all"
+                                                title="Choose the kind of state" name="SelectStateEditKind">
+                                                <option value="" selected="selected"></option>
+                                                <option value="final">Final</option>
+                                                <option value="history">History</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogStateRemove" class="Dialog" title="Remove state">
+                        <p>
+                            Are you sure to delete the state <span id="StateNameToRemove"></span>
+                        </p>
+                    </div>
+                    <div id="dialogTransitionEdit" class="Dialog" title="Edit transition">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="event">
+                                                Event:</label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectEvent" class=" ui-corner-all">
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="condition">
+                                                Condition:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="condition" id="TransitionCondition" class="ui-widget-content ui-corner-all code" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="nextState">
+                                                Next state:</label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectStateNext" class="ui-widget-content ui-corner-all">
+                                                <option selected="selected">Internal</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogActionEditCode" class="Dialog" title="Action code">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="actionCode">
+                                                Enter action code:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="actionCode" id="InputActionEdit" class="ui-widget-content ui-corner-all code" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogActionEditTimerStart" class="Dialog" title="Start a timer">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="TimerStartName">
+                                                Timer name:</label>
+                                        </th>
+                                        <td>
+                                            <select id="TimerStartName" name="TimerStartName" class="TimerList ui-widget-content ui-corner-all">
+                                                <option></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="TimerDuration">
+                                                Duration:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="TimerDuration" id="TimerDuration" class="ui-widget-content ui-corner-all code" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogActionEditTimerStop" class="Dialog" title="Stop a timer">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="TimerStopName">
+                                                Timer name:</label>
+                                        </th>
+                                        <td>
+                                            <select id="TimerStopName" name="TimerStopName" class="TimerList ui-widget-content ui-corner-all">
+                                                <option></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    
+                    <div id="dialogEventEdit" class="Dialog" title="Edit event">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="EventType">
+                                                Event type:</label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectEventType" name="EventType" class="ui-widget-content ui-corner-all">
+                                                <option value="event">Event</option>
+                                                <option value="timer">Timer</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="EventId">
+                                                Event id:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="EventId" id="InputEventId" class="ui-widget-content ui-corner-all code"
+                                                title="The event id is used as a reference in the transitions" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="EventParams">
+                                                Event parameters:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="EventParams" id="InputEventParams" class="ui-widget-content ui-corner-all code"
+                                                title="Foo foo, Bar bar, ...." />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            <label for="EventName">
+                                                Event name:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="EventName" id="InputEventName" class="ui-widget-content ui-corner-all code"
+                                                title="Eventually add an event name, if empty, the event id is used instead. The event name is the function name of the context relative to this event" />
+                                        </td>
+                                    </tr>
+                                    <tr class="EventPrePostAction">
+                                        <th>
+                                            <label for="EventPreAction">
+                                                Pre action:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="EventPreAction" id="InputEventPreAction" class="ui-widget-content ui-corner-all code"
+                                                title="execute this action when this event is received, before the eventual action executed in a transition" />
+                                        </td>
+                                    </tr>
+                                    <tr class="EventPrePostAction">
+                                        <th>
+                                            <label for="EventPostAction">
+                                                Post action:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="EventPostAction" id="InputEventPostAction" class="ui-widget-content ui-corner-all code"
+                                                title="execute this action when this event is received, after the eventual action executed in a transition" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogEventSourceEdit" class="Dialog" title="Edit event source">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="EventSource">
+                                                Event source name:</label>
+                                        </th>
+                                        <td>
+                                            <input type="text" name="EventSource" id="InputEventSource" class="ui-widget-content ui-corner-all code"
+                                                title="The event source groups related events" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogParallelAdd" class="Dialog" title="Add a parallel region">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="ParallelRegionCount">
+                                                Number of region :
+                                            </label>
+                                        </th>
+                                        <td>
+                                            <input id="InputParallelRegionCount" type="number" value="2" title="Enter the number of region"
+                                                class="ui-widget-content ui-corner-all" name="ParallelRegionCount" />
+                                        </td>
+                                    </tr>
+                                    <tr id="dialogParallelNextState">
+                                        <th>
+                                            <label for="NextState">
+                                                Next state:</label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectParallelAddNextState" class="ui-widget-content ui-corner-all">
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                    <div id="dialogParallelEdit" class="Dialog" title="Edit a parallel region">
+                        <fieldset>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>
+                                            <label for="NextState">
+                                                Next state:</label>
+                                        </th>
+                                        <td>
+                                            <select id="SelectParallelEditNextState" class="ui-widget-content ui-corner-all">
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div id="tabEvents">
+                 <div class="fg-toolbar ui-widget ui-helper-clearfix">
+                    <div class="fg-buttonset">
+                        <button class="Undo fg-button">
+                            Undo</button>
+                        <button class="Redo fg-button">
+                            Redo</button>
+                        <div id="Div1" class="fg-button">
+                        </div>
+                    </div>
+                </div>
+                <div id="TableEventContainer">
+                    <table id="TableEvent" class="ui-widget">
+                        <thead class="ui-widget-header">
+                            <tr>
+                                <th class="eventSource">
+                                    Source
+                                </th>
+                                <th class="event">
+                                    Id
+                                </th>
+                                <th class="event">
+                                    Type
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="TableEventBody" class="ui-widget-content">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="tabXmlModel">
+                <div id="StateMachineEditor">
+                    <pre id="editor"></pre>
+                </div>
+            </div>
+            <div id="tabDrillDown" class="ui-tabs-hide">
+                <div id="DrillDownTopContainer ui-widget-content">
+                    <div class="DrillDownTopContainerState">
+                        <div class="grey DrillDownContainer ui-widget-content">
+                            <ul class="drillDownState">
+                                <li><a href='#'>State</a>
+                                    <ul>
+                                        <li><a class='StateEdit' href='#'>Edit state</a></li>
+                                        <li><a class='StateAdd' href='#'>Add state</a></li>
+                                        <li class="LiStateDelete"><a class='StateDelete' href='#'>Delete state</a></li>
+                                        <li class="LiStateCut"><a class='StateCut' href='#'>Cut state</a></li>
+                                        <li><a href='#'>Paste state</a>
+                                            <ul>
+                                                <li class="LiStatePasteAfter"><a class='StatePasteAfter' href='#'>Paste state after</a></li>
+                                                <li class="LiStatePasteBefore"><a class='StatePasteBefore' href='#'>Paste state before</a></li>
+                                                <li class="LiStatePasteAsChild"><a class='StatePasteAsChild' href='#'>Paste as child
+                                                    state </a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="LiEntryAdd"><a class='EntryAdd' href='#'>Entry</a>
+                                    <ul>
+                                        <li><a href='#'>Add</a>
+                                            <ul>
+                                                <li><a class='StateEntryCodeAdd' href='#'>Add code</a></li>
+                                                <li><a class='StateEntryTimerStart' href='#'>Start a timer</a></li>
+                                                <li><a class='StateEntryTimerStop' href='#'>Stop a timer</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a class='StateEntryRemove' href='#'>Remove entry</a></li>
+                                        <li><a class='StateEntryPasteAction' href='#'>Paste action</a></li>
+                                    </ul>
+                                </li>
+                                <li class="LiExitAdd"><a class='ExitAdd' href='#'>Exit</a>
+                                    <ul>
+                                        <li><a href='#'>Add</a>
+                                            <ul>
+                                                <li><a class='StateExitCodeAdd' href='#'>Add code</a></li>
+                                                <li><a class='StateExitTimerStart' href='#'>Start a timer</a></li>
+                                                <li><a class='StateExitTimerStop' href='#'>Stop a timer</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a class='StateExitRemove' href='#'>Remove exit</a></li>
+                                        <li><a class='StateExitPasteAction' href='#'>Paste action</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href='#'>Transition</a>
+                                    <ul>
+                                        <li><a class='StateTransitionAdd' href='#'>Add transition</a></li>
+                                        <li><a class='StateTransitionsRemove' href='#'>Remove transitions</a></li>
+                                        <li><a class='StateTransitionPaste' href='#'>Paste transition</a></li>
+                                    </ul>
+                                </li>
+                                <li class="LiParallel"><a href='#'>Parallel</a>
+                                    <ul>
+                                        <li class="LiParallelAdd"><a class='ParallelAdd' href='#'>Add parallel region</a></li>
+                                        <li class="LiParallelEdit"><a class='ParallelRemove' href='#'>Remove parallel region</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="DrillDownTopContainerTransition">
+                        <div class="grey DrillDownContainer ui-widget-content">
+                            <ul class="drillDownTransition">
+                                <li><a class='TransitionEdit' href='#'>Update transition</a></li>
+                                <li><a class='TransitionAdd' href='#'>Add transition</a></li>
+                                <li><a class='TransitionActionAdd' href='#'>Add action</a>
+                                    <ul>
+                                        <li><a class='TransitionCodeAdd' href='#'>Add code</a></li>
+                                        <li><a class='TransitionTimerStart' href='#'>Start a timer</a></li>
+                                        <li><a class='TransitionTimerStop' href='#'>Stop a timer</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class='TransitionCut' href='#'>Cut transition</a></li>
+                                <li><a href='#'>Paste</a>
+                                    <ul>
+                                        <li><a class='TransitionPasteAbove' href='#'>Paste transition above</a></li>
+                                        <li><a class='TransitionPasteBelow' href='#'>Paste transition below</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="DrillDownTopContainerAction">
+                        <div class="grey DrillDownContainer ui-widget-content">
+                            <ul class="drillDownAction">
+                                <li><a class='ActionEdit' href='#'>Update action</a></li>
+                                <li><a class='ActionAdd' href='#'>Add action</a>
+                                    <ul>
+                                        <li><a class='CodeAdd' href='#'>Add code</a></li>
+                                        <li><a class='TimerStart' href='#'>Start a timer</a></li>
+                                        <li><a class='TimerStop' href='#'>Stop a timer</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class='ActionCut' href='#'>Cut action</a></li>
+                                <li><a href='#'>Paste</a>
+                                    <ul>
+                                        <li><a class='ActionPasteAbove' href='#'>Paste action above</a></li>
+                                        <li><a class='ActionPasteBelow' href='#'>Paste action below</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="DrillDownTopContainerEvent">
+                        <div class="grey DrillDownContainer ui-widget-content">
+                            <ul class="drillDownEvent">
+                                <li><a class='EventEdit' href='#'>Update event</a></li>
+                                <li><a class='EventAdd' href='#'>Add event</a></li>
+                                <li><a class='EventCut' href='#'>Cut event</a></li>
+                                <li><a href='#'>Paste event</a>
+                                    <ul>
+                                        <li><a class='EventPasteAbove' href='#'>above</a></li>
+                                        <li><a class='EventPasteBelow' href='#'>below</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="DrillDownTopContainerEventSource">
+                        <div class="grey DrillDownContainer ui-widget-content">
+                            <ul class="drillDownEventSource">
+                                <li><a class='EventSourceEdit' href='#'>Update event source</a></li>
+                                <li><a class='EventSourceAdd' href='#'>Add event source</a></li>
+                                <li><a class='EventSourceCut' href='#'>Cut event source</a></li>
+                                <li><a href='#'>Paste event source</a>
+                                    <ul>
+                                        <li><a class='EventSourcePasteAbove' href='#'>above</a></li>
+                                        <li><a class='EventSourcePasteBelow' href='#'>below</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{
+  "name": "state-diagram-editor",
+  "description": "an online state diagram editor",
+  "version": "0.0.3",
+  "main": "lib/StateDiagramEditor.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:FredericHeem/StateDiagramEditor.git"
+  },
+  "author": {
+    "name": "Frederic Heem",
+    "email": "frederic@gmail.com"
+  },
+  "dependencies": {
+    "brace": "x",
+  },
+  "devDependencies": {
+    "async": "~0.9.0",
+    "browserify": "5.12.1",
+    "browserify-ejs": "0.0.2",
+    "codeclimate-test-reporter": "x",
+    "coveralls": "~2.11.2",
+    "debug": "2.0.x",
+    "grunt": "~0.4.5",
+    "grunt-bower-install": "~1.6.0",
+    "grunt-browserify": "x",
+    "grunt-cli": "0.1.13",
+    "grunt-concurrent": "~1.0.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.0",
+    "grunt-contrib-connect": "~0.8.0",
+    "grunt-contrib-copy": "~0.6.0",
+    "grunt-contrib-cssmin": "~0.10.0",
+    "grunt-contrib-htmlmin": "~0.3.0",
+    "grunt-contrib-imagemin": "~0.8.1",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-ejs": "0.2.0",
+    "grunt-mocha": "~0.4.11",
+    "grunt-shell": "~1.1.1",
+    "grunt-usemin": "~2.4.0",
+    "istanbul": "0.3.2",
+    "jshint-stylish": "~1.0.0",
+    "konphyg": "1.4.x",
+    "load-grunt-tasks": "~0.6.0",
+    "mocha": "1.21.4",
+    "mocha-lcov-reporter": "0.0.1",
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.15"
+    "chai": "1.10.0",
+    "request": "~2.44.0",
+    "supertest": "0.13.0",
+    "time-grunt": "~1.0.0",
+    "underscore": "1.7.0",
+    "node-dir": "0.1.6"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "./node_modules/grunt-cli/bin/grunt serve",
+    "test": " mocha-phantomjs test/TestRunner.html",
+    "coverage": "NODE_ENV=demo istanbul cover _mocha -- test/*.js",
+    "coveralls": "npm run-script coverage && coveralls < coverage/lcov.info",
+    "codeclimate": "CODECLIMATE_REPO_TOKEN=aa codeclimate < coverage/lcov.info"
+  },
+  "readmeFilename": "README.md"
+}
