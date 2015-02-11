@@ -12,7 +12,7 @@
     "email": "frederic@gmail.com"
   },
   "dependencies": {
-    "brace": "x",
+    "brace": "x"
   },
   "devDependencies": {
     "async": "~0.9.0",
@@ -47,7 +47,7 @@
     "mocha": "1.21.4",
     "mocha-lcov-reporter": "0.0.1",
     "mocha-phantomjs": "^3.5.3",
-    "phantomjs": "^1.9.15"
+    "phantomjs": "^1.9.15",
     "chai": "1.10.0",
     "request": "~2.44.0",
     "supertest": "0.13.0",
@@ -60,7 +60,7 @@
   },
   "scripts": {
     "start": "./node_modules/grunt-cli/bin/grunt serve",
-    "test": " mocha-phantomjs test/TestRunner.html",
+    "test": "mocha-phantomjs test/TestRunner.html",
     "coverage": "NODE_ENV=demo istanbul cover _mocha -- test/*.js",
     "coveralls": "npm run-script coverage && coveralls < coverage/lcov.info",
     "codeclimate": "CODECLIMATE_REPO_TOKEN=aa codeclimate < coverage/lcov.info"
