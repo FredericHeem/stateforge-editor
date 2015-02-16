@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var dir = require('node-dir');
 
-var exampleDir = __dirname + '/../app/examples/';
+var exampleDir = __dirname + '/../app/assets/examples/';
 
 var bundle = {};
 var bundleFilename =  __dirname + '/../test/examples.js';

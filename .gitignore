@@ -1,5 +1,6 @@
 .project
 node_modules
+public
 dist
 .tmp
 .sass-cache

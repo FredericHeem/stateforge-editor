@@ -1,33 +1,107 @@
-'use strict';
-
-module.exports = function (grunt) {
-
-    // Load grunt tasks automatically
-    require('load-grunt-tasks')(grunt);
-
-    // Time how long tasks take. Can help when optimizing build times
-    require('time-grunt')(grunt);
-
-    // Configurable paths
-    var config = {
-        app: 'app',
-        dist: 'dist'
-    };
-
-    // Define the configuration for all the tasks
+module.exports = function(grunt) {
+   
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        // Project settings
-        config: config,
-        shell: {
-            browserify: {
-                options: {
-                    stdout: true,
-                    stderr: true
-                },
-                command: './node_modules/browserify/bin/cmd.js lib/StateDiagramEditor.js --standalone <%= pkg.name %> -o browser/dist/<%= pkg.name %>.standalone.js'
+        
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc',
+                reporter: require('jshint-stylish')
+            },
+            all: [
+                'app/**/*.js'
+            ]
+        },
+        clean: {
+            development: 'public',
+            production: 'dist'
+        },
+        
+        copy: {
+            development: {
+                files: [
+                        {
+                            expand: true,
+                            cwd: 'app/assets',
+                            src: '**',
+                            dest: 'public',
+                            filter: 'isFile'
+                        }
+                        ]
+            },
+            production: {
+                files: [
+                        {
+                            expand: true,
+                            cwd: 'app/assets',
+                            src: '**',
+                            dest: 'dist',
+                            filter: 'isFile'
+                        }
+                        ]
             }
         },
+
+        ejs: {
+            options: {
+                environment: process.env.NODE_ENV || 'dev'
+            },
+
+            'index.html': {
+                src: 'app/index.html',
+                dest: 'public/index.html'
+            }
+        },
+
+        stylus: {
+            development: {
+                options: {
+                    'include css': true,
+                    'compress': false
+                },
+                files: {
+                    'public/app.css': ['app/styles/index.styl']
+                }
+            }
+        },
+        
+        concat: {
+            development_js: {
+                options: {
+                    separator: '\n'
+                },
+
+                files: {
+                    'public/head.js': [
+                                       'bower_components/modernizr/modernizr.js'
+                                       ],
+                    'public/vendor.js': [
+                                        'bower_components/jquery/dist/jquery.js',
+                                        'bower_components/jquery-ui/jquery-ui.min.js',
+                                        'bower_components/qtip2/jquery.qtip.min.js',
+                                        'vendor/jquery-drill-down-menu-plugin/js/jquery.cookie.js',
+                                        'vendor/jquery-drill-down-menu-plugin/js/jquery.dcdrilldown.1.2.js',
+                                        'vendor/jquery.themeswitcher.js'
+                                                            ]
+                }
+            },
+
+            development_css: {
+                options: {
+                    separator: '\n'
+                },
+
+                files: {
+                    'public/vendor.css': [
+                                          'bower_components/qtip2/jquery.qtip.min.css',
+                                          'vendor/jquery-drill-down-menu-plugin/css/dcdrilldown.css',
+                                          'vendor/jquery-drill-down-menu-plugin/css/skins/grey.css',
+                                          'vendor/jquery-drill-down-menu-plugin/css/skins/demo.css'
+                                          ]
+                }
+            }
+        },
+
         browserify: {
             options: {
                 detectGlobals: false,
@@ -38,95 +112,79 @@ module.exports = function (grunt) {
                 options: {
                     debug: true
                 },
+
                 files: {
-                    '<%= config.dist %>/app.js': '<%= config.app %>/main.js'
-                }
-            }
-        },
-        // Watches files for changes and runs tasks based on the changed files
-        watch: {
-            bower: {
-                files: ['bower.json'],
-                tasks: ['bowerInstall']
-            },
-            js: {
-                files: ['<%= config.app %>/{,*/}*.{js,html}', 'lib/*.js'],
-                tasks: ['shell','browserify:development','jshint'],
-                options: {
-                    livereload: true
+                    'public/app.js': 'app/main.js'
                 }
             },
-            jstest: {
-                files: ['test/spec/{,*/}*.js'],
-                tasks: ['test:watch']
-            },
-            gruntfile: {
-                files: ['Gruntfile.js']
-            },
-            styles: {
-                files: ['<%= config.app %>/styles/{,*/}*.css'],
-                tasks: ['concat:development_css'],
-                options: {
-                    livereload: true
+
+            production: {
+                files: {
+                    'dist/app.js': 'app/main.js'
                 }
-            },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '<%= config.app %>/{,*/}*.html',
-                    '<%= config.app %>/images/{,*/}*'
-                ]
             }
         },
 
-        concat: {
-            development_css: {
-                options: {
-                    separator: '\n'
-                },
-
+        uglify: {
+            libraries: {
                 files: {
-                    '<%= config.dist %>/styles/main.css': 
-                        [
-                         '<%= config.app %>/styles/main.css'
-                         ]
+                    'dist/head.js': ['public/head.js'],
+                    'dist/vendor.js': 'public/vendor.js'
+                }
+            },
+
+            application: {
+                files: {
+                    'dist/app.js': 'dist/app.js'
                 }
             }
         },
-        // The actual grunt server settings
+
+        htmlmin: {
+            options: {
+                collapseWhitespace: true
+            },
+
+            production: {
+                files: {
+                    'dist/index.html': 'public/index.html'
+                }
+            }
+        },
+
+        cssmin: {
+            production: {
+                files: {
+                    'dist/app.css': 'public/app.css',
+                    'dist/vendor.css': 'public/vendor.css'
+                }
+            }
+        },
+
         connect: {
             options: {
                 port: 9000,
                 open: true,
                 livereload: 35730,
                 // Change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: 'localhost',
+                keepalive: true
             },
-            livereload: {
+            development: {
                 options: {
                     middleware: function(connect) {
                         return [
-                            connect().use('/bower_components', connect.static('./bower_components')),
-                            connect().use('/vendor', connect.static('./vendor')),
-                            connect.static(config.dist),
+                            connect.static('public'),
                             connect.static('browser/dist')
                         ];
                     }
                 }
             },
-            test: {
+            production: {
                 options: {
-                    open: false,
-                    port: 9001,
                     middleware: function(connect) {
                         return [
-                            connect.static('test'),
-                            connect().use('/bower_components', connect.static('./bower_components')),
-                            connect().use('/vendor', connect.static('./vendor')),
-                            connect.static(config.dist),
-                            connect.static('browser/dist')
+                            connect.static('dist'),
                         ];
                     }
                 }
@@ -139,151 +197,67 @@ module.exports = function (grunt) {
             }
         },
 
-        // Empties folders to start fresh
-        clean: {
-            dist: {
-                files: [{
-                    dot: true,
-                    src: [
-                        '<%= config.dist %>/*',
-                        '!<%= config.dist %>/.git*'
-                    ]
-                }]
-            }
-        },
-
-        // Make sure code styles are up to par and there are no obvious mistakes
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc',
-                reporter: require('jshint-stylish')
+        watch: {
+            gruntfile: {
+                files: ['Gruntfile.js'],
+                tasks: ['browserify:development']
             },
-            all: [
-                'Gruntfile.js',
-                '<%= config.app %>/scripts/{,*/}*.js',
-                '!<%= config.app %>/scripts/vendor/*',
-                'test/spec/{,*/}*.js'
-            ]
-        },
-
-        // Mocha testing framework configuration options
-        mocha: {
-            all: {
-                options: {
-                    run: true,
-                    urls: ['http://<%= connect.test.options.hostname %>:<%= connect.test.options.port %>/index.html']
-                }
-            }
-        },
-
-        // Automatically inject Bower components into the HTML file
-        bowerInstall: {
-            app: {
-                src: ['<%= config.app %>/index.html'],
-                exclude: ['bower_components/bootstrap/dist/js/bootstrap.js']
-            }
-        },
-        ejs: {
-            options: {
-                environment: process.env.NODE_ENV || 'dev'
-            },
-
-            'index.html': {
-                src: '<%= config.app %>/index.html',
-                dest: '<%= config.dist %>/index.html'
-            }
-        },
-        // Copies remaining files to places other tasks can use
-        copy: {
-            dist: {
-                files: [{
-                    expand: true,
-                    dot: true,
-                    cwd: '<%= config.app %>',
-                    dest: '<%= config.dist %>',
-                    src: [
-                        'indent.xsl',
-                        'images/*.{ico,png}',
-                        'examples/cpp/*.fsmcpp',
-                        'examples/java/*.fsmjava',
-                        'examples/dotnet/*.fsmcs',
-                        '{,*/}*.html',
-                        'styles/fonts/{,*/}*.*'
-                    ]
-                }, {
-                    expand: true,
-                    dot: true,
-                    cwd: 'bower_components/bootstrap/dist',
-                    src: ['fonts/*.*'],
-                    dest: '<%= config.dist %>'
-                }]
-            },
-            styles: {
-                expand: true,
-                dot: true,
-                cwd: '<%= config.app %>/styles',
-                dest: '.tmp/styles/',
-                src: '{,*/}*.css'
-            }
-        },
-
-        // Run some tasks in parallel to speed up build process
-        concurrent: {
-            server: [
-                'copy:styles'
-            ],
-            test: [
-                'copy:styles'
-            ],
-            dist: [
-                'copy:styles'
-            ]
-        }
-    });
-
-    grunt.registerTask('serve', function (target) {
-        if (target === 'dist') {
-            return grunt.task.run(['build', 'connect:dist:keepalive']);
-        }
-
-        grunt.task.run([
-            'ejs',
-            'concat',
-            'shell:browserify',
-            'browserify:development',
-            'copy:dist',
-            'concurrent:server',
-            'connect:livereload',
-            'watch'
             
-        ]);
-    });
+            modules: {
+                files: ['app/**/*', 'lib/**/*'],
+                tasks: 'browserify:development'
+            },
+/*
+            livereload: {
+                options: {
+                },
 
-    grunt.registerTask('test', function (target) {
-        if (target !== 'watch') {
-            grunt.task.run([
-                'concurrent:test'
-            ]);
+                files: [
+                        'public/*.js',
+                        'public/*.css'
+                        ]
+            }
+            */
+        },
+
+        concurrent: {
+            options: {
+                logConcurrentOutput: true
+            },
+
+            serve: ['watch', 'connect:development']
         }
+    })
 
-        grunt.task.run([
-            'connect:test',
-            'mocha'
-        ]);
-    });
+        // Load grunt tasks automatically
+    require('load-grunt-tasks')(grunt);
 
-    grunt.registerTask('build', [
-        'clean:dist',
-        'concat',
-        'shell:browserify',
-        'browserify:development',
-        'concurrent:dist',
-        'copy:dist'
-    ]);
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
 
-    grunt.registerTask('default', [
-        'newer:jshint',
-        'test',
-        'build'
-    ]);
-};
+    grunt.registerTask('development',
+            [
+             'ejs',
+             'copy:development',
+             'stylus',
+             'concat',
+             'browserify:development'
+             ]
+    )
+
+    grunt.registerTask('production',
+            [
+             'ejs',
+             'copy:production',
+             'stylus',
+             'concat',
+             'browserify:production',
+             'uglify',
+             'htmlmin',
+             'cssmin'
+             ]
+    )
+    grunt.registerTask('serve_prod', ['production', 'connect:production'])
+    grunt.registerTask('serve', ['development', 'concurrent:serve'])
+    grunt.registerTask('default', ['development'])
+}
