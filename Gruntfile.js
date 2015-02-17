@@ -226,9 +226,21 @@ module.exports = function(grunt) {
             },
 
             serve: ['watch', 'connect:development']
+        },
+        'ftp-deploy': {
+            build: {
+                auth: {
+                    host: 'ftp.stateforge.com',
+                    port: 21,
+                    authKey: 'key1'
+                },
+                src: 'dist',
+                dest: '/StateMachineDiagram',
+                exclusions: ['**/.DS_Store']
+            }
         }
     })
-
+   
         // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
