@@ -91,7 +91,9 @@ function examplesCreate(div, array, urlPrefix, fileSuffix) {
         examplesDiv.appendChild(li);
         var anchor = document.createElement("a");
         li.appendChild(anchor);
-        anchor.setAttribute("href", "/index.html?fsmUrl=" + getStateMachineUrlFromName(example, urlPrefix, fileSuffix) + "#");
+        
+        anchor.setAttribute("href", "?fsmUrl=" + getStateMachineUrlFromName(example, urlPrefix, fileSuffix) + "#");
+        
         anchor.setAttribute("class", "SateMachineExample");
         anchor.appendChild(document.createTextNode(example));
     }
