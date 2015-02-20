@@ -62,7 +62,7 @@
   },
   "scripts": {
     "start": "./node_modules/grunt-cli/bin/grunt serve",
-    "test": "mocha-phantomjs test/TestRunner.html",
+    "test": "./node_modules/grunt-cli/bin/grunt development && mocha-phantomjs test/TestRunner.html",
     "coverage": "NODE_ENV=demo istanbul cover _mocha -- test/*.js",
     "coveralls": "npm run-script coverage && coveralls < coverage/lcov.info",
     "codeclimate": "CODECLIMATE_REPO_TOKEN=aa codeclimate < coverage/lcov.info"

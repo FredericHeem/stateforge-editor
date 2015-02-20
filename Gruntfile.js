@@ -78,6 +78,17 @@ module.exports = function(grunt) {
                     'public/vendor.js': [
                                         'bower_components/jquery/dist/jquery.js',
                                         'bower_components/jquery-ui/jquery-ui.min.js',
+                                        'public/StateDiagramVendor.js'
+                                        ]
+                }
+            },
+            development_lib_js: {
+                options: {
+                    separator: '\n'
+                },
+
+                files: {
+                    'public/StateDiagramVendor.js': [
                                         'bower_components/qtip2/jquery.qtip.min.js',
                                         'vendor/jquery-drill-down-menu-plugin/js/jquery.cookie.js',
                                         'vendor/jquery-drill-down-menu-plugin/js/jquery.dcdrilldown.1.2.js',
@@ -92,11 +103,12 @@ module.exports = function(grunt) {
                 },
 
                 files: {
-                    'public/vendor.css': [
+                    'public/StateDiagramEditor.css': [
                                           'bower_components/qtip2/jquery.qtip.min.css',
                                           'vendor/jquery-drill-down-menu-plugin/css/dcdrilldown.css',
                                           'vendor/jquery-drill-down-menu-plugin/css/skins/grey.css',
-                                          'vendor/jquery-drill-down-menu-plugin/css/skins/demo.css'
+                                          'vendor/jquery-drill-down-menu-plugin/css/skins/demo.css',
+                                          'lib/StateDiagram.css'
                                           ]
                 }
             }
@@ -114,10 +126,18 @@ module.exports = function(grunt) {
                 },
 
                 files: {
-                    'public/app.js': 'app/main.js'
+                    'public/app.js': 'app/main.js',
                 }
             },
+            development_lib: {
+                options: {
+                    debug: true
+                },
 
+                files: {
+                    'public/StateDiagramEditor.js': ['lib/StateDiagramEditor.js']
+                }
+            },
             production: {
                 files: {
                     'dist/app.js': 'app/main.js'
@@ -252,7 +272,10 @@ module.exports = function(grunt) {
              'ejs',
              'copy:development',
              'stylus',
-             'concat',
+             'concat:development_lib_js',
+             'browserify:development_lib',
+             'concat:development_js',
+             'concat:development_css',
              'browserify:development'
              ]
     )
@@ -262,7 +285,10 @@ module.exports = function(grunt) {
              'ejs',
              'copy:production',
              'stylus',
-             'concat',
+             'concat:development_lib_js',
+             'browserify:development_lib',
+             'concat:development_js',
+             'concat:development_css',
              'browserify:production',
              'uglify',
              'htmlmin',

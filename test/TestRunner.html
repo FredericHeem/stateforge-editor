@@ -2,13 +2,16 @@
     <head>
         <title> Tests </title>
         <link rel="stylesheet" href="../node_modules/mocha/mocha.css" />
+        <link rel="stylesheet" href="../public/StateMachineDiagram.css" />
     </head>
     <body>
         <div id="mocha"></div>
         
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/jquery-ui/jquery-ui.min.js"></script>
-        <script src="../browser/dist/state-diagram-editor.standalone.js"></script>
+        
+        <script src="../public/StateDiagramVendor.js"></script>
+        <script src="../public/StateDiagramEditor.js"></script>
         
         <script src="../node_modules/mocha/mocha.js"></script>
         <script src="../node_modules/chai/chai.js"></script>
@@ -20,9 +23,15 @@
         </script>
         <script src="examples.js"></script>
         <script src="testModel.js"></script>
+        <script src="testView.js"></script>
+        <script src="testController.js"></script>
         <script>
             if (window.mochaPhantomJS) { mochaPhantomJS.run(); }
             else { mocha.run(); }
         </script>
+        
+        <div id="switcher" class="fg-button">
+                        </div>
+        <div id="StateMachineDiagram"></div>
     </body>
 </html>
